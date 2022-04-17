@@ -68,6 +68,45 @@ const managerQuestions = [
 const engineerQuestions = [
     {
         type: 'input',
+        name: 'name',
+        message: "What is your name? (Required)",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log("Please provide your name!");
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is your employee ID? (Required)',
+        validate: idInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Please provide your employee ID!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is your email address? (Required)',
+        validate: emailInput => {
+            if (emailInput) {
+                return true;
+            } else {
+                console.log('Please provide your email address!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
         name: 'github',
         message: 'What is your Github username? (Required)',
         validate: gitInput => {
@@ -82,6 +121,45 @@ const engineerQuestions = [
 ]
 
 const internQuestions = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is your name? (Required)",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log("Please provide your name!");
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is your employee ID? (Required)',
+        validate: idInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Please provide your employee ID!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is your email address? (Required)',
+        validate: emailInput => {
+            if (emailInput) {
+                return true;
+            } else {
+                console.log('Please provide your email address!');
+                return false;
+            }
+        }
+    },
     {
         type: 'input',
         name: 'school',
@@ -121,6 +199,14 @@ function init() {
                 engineer = new Engineer(data);
                 this.team.push(engineer);
             })
+        } else if (choice === 'Add Intern') {
+            inquirer.prompt(internQuestions)
+            .then(data => {
+                intern = new Intern(data);
+                this.team.push(intern);
+            })
+        } else {
+            //Finish team profile
         }
     })
 
