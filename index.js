@@ -2,7 +2,13 @@ const inquirer = require('inquirer');
 const jest = require('jest');
 const fs = require('fs');
 
-const questions = [
+const Employee = require('./lib/Employee');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const generateHTML = require('./src/generateHTML');
+
+const managerQuestions = [
     {
         type: 'input',
         name: 'name',
@@ -54,11 +60,77 @@ const questions = [
                 return false;
             }
         }
-    },
-    {
-        type: 'list',
-        name: 'role',
-        message: 'Would you like to an add enginner, an intern, or finish building your team?',
-        choices: ['Engineer', 'Intern', 'Finish building team']
     }
 ]
+
+const engineerQuestions = [
+    {
+        type: 'input',
+        name: 'github',
+        message: 'What is your Github username? (Required)',
+        validate: gitInput => {
+            if (gitInput) {
+                return true;
+            } else {
+                console.log('Please provide your Github username!');
+                return false;
+            }
+        }
+    }
+]
+
+const internQuestions = [
+    {
+        type: 'input',
+        name: 'school',
+        message: 'What is the name of the school your currently attend? (Required)',
+        validate: schoolInput => {
+            if (schoolInput) {
+                return true;
+            } else {
+                console.log('Please provide the name of your current school!');
+                return false;
+            }
+        }
+    }
+]
+
+function init() {
+    this.team = [];
+
+    inquirer.prompt(managerQuestions)
+        .then(data=> {
+            manager = new Manager(data);
+            this.team.push(manager);
+        });
+
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'addEmployee',
+            message: 'Would you like to add an engineer, an intern, or are you finished building your team?',
+            choices: ['Add Engineer', 'Add Intern', 'Finish building team']
+        }
+    ])
+    .then(({choice}) => {
+        if (choice == 'Add Engineer') {
+            inquirer.prompt(engineerQuestions)
+            .then(data => {
+                Engineer(data);
+            })
+        }
+    })
+
+
+}
+
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return; 
+        } else {
+            console.log("Team profile successfully created. You will find your profile in the dist folder.")
+        }
+    })
+}; 
