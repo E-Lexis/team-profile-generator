@@ -8,6 +8,8 @@ const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const generateHTML = require('./src/generateHTML');
 
+
+
 const managerQuestions = [
     {
         type: 'input',
@@ -116,7 +118,8 @@ function init() {
         if (choice == 'Add Engineer') {
             inquirer.prompt(engineerQuestions)
             .then(data => {
-                Engineer(data);
+                engineer = new Engineer(data);
+                this.team.push(engineer);
             })
         }
     })
