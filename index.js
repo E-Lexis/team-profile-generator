@@ -29,7 +29,7 @@ const managerQuestions = [
         name: 'id',
         message: 'What is your employee ID? (Required)',
         validate: idInput => {
-            if (nameInput) {
+            if (idInput) {
                 return true;
             } else {
                 console.log('Please provide your employee ID!');
@@ -69,12 +69,12 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is your name? (Required)",
+        message: "What is your engineer's name? (Required)",
         validate: nameInput => {
             if (nameInput) {
                 return true;
             } else {
-                console.log("Please provide your name!");
+                console.log("Please provide your engineer's name!");
                 return false;
             }
         }
@@ -82,12 +82,12 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'id',
-        message: 'What is your employee ID? (Required)',
+        message: "What is your engineer's employee ID? (Required)",
         validate: idInput => {
             if (nameInput) {
                 return true;
             } else {
-                console.log('Please provide your employee ID!');
+                console.log("Please provide your engineer's employee ID!");
                 return false;
             }
         }
@@ -95,12 +95,12 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'email',
-        message: 'What is your email address? (Required)',
+        message: "What is your engineer's email address? (Required)",
         validate: emailInput => {
             if (emailInput) {
                 return true;
             } else {
-                console.log('Please provide your email address!');
+                console.log("Please provide your engineer's email address!");
                 return false;
             }
         }
@@ -108,12 +108,12 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'github',
-        message: 'What is your Github username? (Required)',
+        message: "What is your engineer's Github username? (Required)",
         validate: gitInput => {
             if (gitInput) {
                 return true;
             } else {
-                console.log('Please provide your Github username!');
+                console.log("Please provide your engineer's Github username!");
                 return false;
             }
         }
@@ -124,12 +124,12 @@ const internQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is your name? (Required)",
+        message: "What is your intern's name? (Required)",
         validate: nameInput => {
             if (nameInput) {
                 return true;
             } else {
-                console.log("Please provide your name!");
+                console.log("Please provide your intern's name!");
                 return false;
             }
         }
@@ -137,12 +137,12 @@ const internQuestions = [
     {
         type: 'input',
         name: 'id',
-        message: 'What is your employee ID? (Required)',
+        message: "What is your intern's employee ID? (Required)",
         validate: idInput => {
-            if (nameInput) {
+            if (idInput) {
                 return true;
             } else {
-                console.log('Please provide your employee ID!');
+                console.log("Please provide your intern's employee ID!");
                 return false;
             }
         }
@@ -150,12 +150,12 @@ const internQuestions = [
     {
         type: 'input',
         name: 'email',
-        message: 'What is your email address? (Required)',
+        message: "What is your intern's email address? (Required)",
         validate: emailInput => {
             if (emailInput) {
                 return true;
             } else {
-                console.log('Please provide your email address!');
+                console.log("Please provide your intern's email address!");
                 return false;
             }
         }
@@ -163,12 +163,12 @@ const internQuestions = [
     {
         type: 'input',
         name: 'school',
-        message: 'What is the name of the school your currently attend? (Required)',
+        message: 'What is the name of the school your intern currently attends? (Required)',
         validate: schoolInput => {
             if (schoolInput) {
                 return true;
             } else {
-                console.log('Please provide the name of your current school!');
+                console.log("Please provide the name of your intern's school!");
                 return false;
             }
         }
@@ -176,15 +176,19 @@ const internQuestions = [
 ]
 
 function init() {
-    this.team = [];
+    const team = [];
 
     inquirer.prompt(managerQuestions)
         .then(data=> {
-            manager = new Manager(data);
-            this.team.push(manager);
+            let manager = new Manager(data);
+            console.log(manager);
+            team.push(manager);
+        })
+        .catch(err => {
+            console.log(err);
         });
 
-    inquirer.prompt([
+    /*inquirer.prompt([
         {
             type: 'list',
             name: 'addEmployee',
@@ -196,21 +200,24 @@ function init() {
         if (choice == 'Add Engineer') {
             inquirer.prompt(engineerQuestions)
             .then(data => {
-                engineer = new Engineer(data);
-                this.team.push(engineer);
+                let engineer = new Engineer(data);
+                console.log(engineer);
+                team.push(engineer);
             })
         } else if (choice === 'Add Intern') {
             inquirer.prompt(internQuestions)
             .then(data => {
-                intern = new Intern(data);
-                this.team.push(intern);
+                let intern = new Intern(data);
+                console.log(intern);
+                team.push(intern);
             })
         } else {
-            //Finish team profile
+            return team;
         }
-    })
+    });
 
-
+console.log(team);
+*/
 }
 
 const writeFile = data => {
@@ -223,3 +230,5 @@ const writeFile = data => {
         }
     })
 }; 
+
+init();
