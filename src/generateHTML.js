@@ -52,6 +52,41 @@ const addIntern = function(intern) {
     </div>`
 }
 
+createCards = (teamArray) => {
+
+    employeeCards = []; 
+
+    for (let i = 0; i < teamArray.length; i++) {
+
+        const role = teamArray[i].getRole(); 
+
+        if (role === 'Manager') {
+            const managerCard = addManager(teamArray[i]);
+
+            employeeCards.push(managerCard);
+        }
+
+        if (role === 'Engineer') {
+            const engineerCard = addEngineer(teamArray[i]);
+
+            employeeCards.push(engineerCard);
+        }
+
+        if (role === 'Intern') {
+            const internCard = addIntern(teamArray[i]);
+
+            employeeCards.push(internCard);
+        }
+        
+    }
+
+    const teamProfile = employeeCards.join('')
+
+    return pageTemplate(teamProfile);
+}
+
+
+
 function pageTemplate(teamData) {
     return `
     <!DOCTYPE html>
@@ -61,7 +96,7 @@ function pageTemplate(teamData) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Team Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
@@ -78,8 +113,10 @@ function pageTemplate(teamData) {
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>
   `;
 }
+
+module.exports = createCards;
