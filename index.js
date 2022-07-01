@@ -85,7 +85,7 @@ const addManagerQuestions = () => {
             }
             if (addEmployee === 'Done') {
                 console.log(teamArray);
-                generateHTML(teamArray);
+                writeFile(teamArray);
             }
         })    
     })
@@ -167,7 +167,7 @@ const addEngineerQuestions = () => {
             }
             if (addEmployee === 'Done') {
                 console.log(teamArray);
-                generateHTML(teamArray);
+                writeFile(teamArray);
             }
         }) 
     })
@@ -249,14 +249,14 @@ const addInternQuestions = () => {
             }
             if (addEmployee === 'Done') {
                 console.log(teamArray);
-                return generateHTML(teamArray);
+                writeFile(teamArray);
             }
         }) 
     })
 };
 
-const writeFile = data => {
-    fs.writeFile('./dist/index.html', data, err => {
+function writeFile(data) {
+    fs.writeFileSync('./dist/index.html', generateHTML(data), err => {
         if (err) {
             console.log(err);
             return; 
@@ -265,5 +265,6 @@ const writeFile = data => {
         }
     })
 }; 
+    
 
 addManagerQuestions();
