@@ -34,6 +34,9 @@ WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 ```
 
+## Example
+![Example profile](https://i.imgur.com/eNK6Q6P.png)
+
 ## App Walkthrough
 
 A walkthrough video of how to use the application to generator your team profile can be found [here](https://drive.google.com/file/d/1xiztP11YVzNPL_u-qap71zafj6raO3rm/view).
